@@ -26,7 +26,7 @@ public class ProductServiceTest {
 	ProductRepository productRepository;
 	
 	@Test
-	public ResponseEntity<String> addProduct(String brand,String colour,String size,Integer price){
+	public void addProduct(){
 		
 		Product product = new Product();
 		product.setBrand("Lee");
@@ -40,15 +40,14 @@ public class ProductServiceTest {
 		when(productRepository.save(any(Product.class))).thenReturn(product);
 		ResponseEntity<String> productResult= productService.addProduct(product);
 		assertNotNull(productResult);
-		return productResult;
+		
 		
 }
 	
 
 
 	@Test
-	public ResponseEntity<List<Product>> getProductByFilter(String brand,
-		      String colour, String size, Integer price){
+	public void getProductByFilter(){
 		
 		Product product = new Product();
 		product.setBrand("Lee");
@@ -62,9 +61,9 @@ public class ProductServiceTest {
 		List<Product> productList = new ArrayList<Product>();
 		productList.add(product);
 		when(productRepository.findAll(any(Product.class))).thenReturn(productList);
-		ResponseEntity<List<Product>> productResponse = productService.getProductByFilter(brand, colour, size, price);
+		ResponseEntity<List<Product>> productResponse = productService.getProductByFilter("lee", "black", "s", 1000);
 		assertNotNull(productResponse);
-		return productResponse;
+		
 		
 	}
 
